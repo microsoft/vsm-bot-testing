@@ -51,7 +51,7 @@ configuration:
               - removeLabel:
                   label: Stale
     scheduledSearches:
-      - description: Close issues that are 'Needs-Info' and 'stale', and have not received any activity for 1 week
+      - description: Close issues that are 'Needs-Info' and 'Stale', and have not received any activity for 1 week
         frequencies:
           - daily:
               time: 23:05
@@ -62,7 +62,7 @@ configuration:
           - hasLabel:
               label: Needs-Info
           - hasLabel:
-              label: stale
+              label: Stale
           - isNotLabeledWith:
               label: DoNotClose
         actions:
@@ -82,14 +82,12 @@ configuration:
           - isNotLabeledWith:
               label: DoNotClose
           - isNotLabeledWith:
-              label: stale
-          - hasLabel:
-              label: triageTest
+              label: Stale
         actions:
           - addReply:
               reply: "${issueAuthor}, this issue will be closed soon due to inactivity. Please add more information to help us triage this issue."
           - addLabel:
-              label: stale
+              label: Stale
       - description: Close lower priority issues that have not received any activity for 18 months
         frequencies:
           - daily:
@@ -104,8 +102,6 @@ configuration:
               label: Priority:1
           - isNotLabeledWith:
               label: DoNotClose
-          - hasLabel:
-              label: triageTest
         actions:
           - closeIssue
           - addReply:
