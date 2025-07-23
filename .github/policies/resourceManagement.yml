@@ -67,7 +67,7 @@ configuration:
               label: DoNotClose
         actions:
           - addReply:
-              reply: "${issueAuthor}, this issue has been closed due to inactivity. Please feel free to reopen it if you have further information or questions."
+              reply: "SHORT ISSUE CLOSE - ${issueAuthor}, this issue has been closed due to inactivity. Please feel free to reopen it if you have further information or questions."
           - closeIssue
       - description: Warn the authors on issues that are 'Needs-Info', and have not received any activity for 1 week
         frequencies:
@@ -105,4 +105,4 @@ configuration:
         actions:
           - closeIssue
           - addReply:
-              reply: "${issueAuthor}, this issue has been closed due to inactivity. Please feel free to reopen it if you have further information or questions."
+              reply: "LONG ISSUE CLOSE - ${issueAuthor}, this issue has been closed due to inactivity. Please feel free to reopen it if you have further information or questions."
