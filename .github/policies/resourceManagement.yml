@@ -54,7 +54,7 @@ configuration:
       - description: Close issues that are 'Needs-Info' and 'Stale', and have not received any activity for 1 week
         frequencies:
           - hourly:
-               hour: 24
+              hour: 24
         filters:
           - isOpen
           - noActivitySince:
