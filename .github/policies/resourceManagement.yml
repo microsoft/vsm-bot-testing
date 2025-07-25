@@ -51,6 +51,15 @@ configuration:
               - removeLabel:
                   label: Stale
     scheduledSearches:
+      - description: TEST - Reply to every issue
+        frequencies:
+          - hourly:
+              hour: 1
+        filters:
+          - isOpen
+        actions:
+          - addReply:
+              reply: "TEST - Scheduled runs work"
       - description: Close issues that are 'Needs-Info' and 'Stale', and have not received any activity for 1 week
         frequencies:
           - daily:
