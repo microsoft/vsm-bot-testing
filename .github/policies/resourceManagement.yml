@@ -54,7 +54,7 @@ configuration:
       - description: Close issues that are 'Needs-Info' and 'Stale', and have not received any activity for 1 week
         frequencies:
           - hourly:
-              hour: 24
+              hour: 1
         filters:
           - isOpen
           - noActivitySince:
@@ -72,7 +72,7 @@ configuration:
       - description: Warn the authors on issues that are 'Needs-Info', and have not received any activity for 1 week
         frequencies:
           - hourly:
-              hour: 24
+              hour: 1
         filters:
           - isOpen
           - noActivitySince:
@@ -91,7 +91,7 @@ configuration:
       - description: Close lower priority issues that have not received any activity for 18 months
         frequencies:
           - hourly:
-              hour: 24
+              hour: 1
         filters:
           - isOpen
           - noActivitySince:
