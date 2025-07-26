@@ -1,4 +1,4 @@
-name: Issue Triage
+name: GitOps.PullRequestIssueManagement
 description: Assign label to new issues without a label
 resource: repository
 disabled: false
