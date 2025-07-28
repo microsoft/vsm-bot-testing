@@ -1,8 +1,10 @@
+id: 
 name: GitOps.PullRequestIssueManagement
-description: Assign label to new issues without a label
+description: Stale PR management for both community and non-community PRs
+owner: 
 resource: repository
 disabled: false
-
+where: 
 configuration:
   resourceManagementConfiguration:
     eventResponderTasks:
