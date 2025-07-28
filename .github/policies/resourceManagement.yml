@@ -56,7 +56,7 @@ configuration:
       - description: Close issues that are 'Needs-Info' and 'Stale', and have not received any activity for 1 week
         frequencies:
           - daily:
-              time: 6:32
+              time: 06:37
         filters:
           - isOpen
           - noActivitySince:
@@ -74,7 +74,7 @@ configuration:
       - description: Warn the authors on issues that are 'Needs-Info', and have not received any activity for 1 week
         frequencies:
           - daily:
-              time: 6:32
+              time: 06:37
         filters:
           - isOpen
           - noActivitySince:
@@ -93,7 +93,7 @@ configuration:
       - description: Close lower priority issues that have not received any activity for 18 months
         frequencies:
           - daily:
-              time: 6:32
+              time: 06:37
         filters:
           - isOpen
           - noActivitySince:
@@ -111,7 +111,7 @@ configuration:
       - description: TEST - Reply to every testing issue
         frequencies:
           - daily:
-              time: 6:32
+              time: 06:37
         filters:
           - isOpen
           - hasLabel:
