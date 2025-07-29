@@ -1,6 +1,6 @@
 id: 
 name: GitOps.PullRequestIssueManagement
-description: Stale PR management for both community and non-community PRs
+description: Issue management and triage
 owner: 
 resource: repository
 disabled: false
@@ -8,7 +8,29 @@ where:
 configuration:
   resourceManagementConfiguration:
     eventResponderTasks:
-      - description: Check if a 'Type' label is assigned to new issues
+      - description: Add bug type label for issues coming from VSCode
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issues
+          - isAction:
+              action: Opened
+          - bodyContains:
+              pattern: "Type: Bug"
+        then:
+          - addLabel:
+              label: Type:Bug
+      - description: Add feature type label for issues coming from VSCode
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issues
+          - isAction:
+              action: Opened
+          - bodyContains:
+              pattern: "Type: Feature Request"
+        then:
+          - addLabel:
+              label: Type:Feature
+      - description: Check if a Type label is assigned to new issues
         triggerOnOwnActions: false
         if:
           - payloadType: Issues
@@ -21,13 +43,13 @@ configuration:
                 - hasLabel:
                     label: Type:Feature
                 - hasLabel:
-                    label: Type:SupportRequest
+                    label: Type:CustomerSupport
         then:
           - addReply:
-              reply: '${issueAuthor}, please add a `Type:Bug`/`Type:Feature`/`Type:SupportRequest` label as applicable.'
+              reply: 'Team, please add a `Type:Bug`/`Type:Feature`/`Type:CustomerSupport` label as applicable.'
           - addLabel:
-              label: Needs-Info
-      - description: Update issue if 'Type' label was assigned # removes 'Needs-Info' if someone assigns a type label
+              label: needs-typeLabel
+      - description: Update issue if Type label was assigned and removes needs-typeLabel
         triggerOnOwnActions: false
         if:
           - payloadType: Issues
@@ -38,22 +60,16 @@ configuration:
             - labelAdded:
                 label: Type:Feature
             - labelAdded:
-                label: Type:SupportRequest
+                label: Type:CustomerSupport
         then:
           - if:
               - hasLabel:
-                  label: Needs-Info
+                  label: needs-typeLabel
             then:
               - removeLabel:
-                  label: Needs-Info
-          - if:
-              - hasLabel:
-                  label: Stale
-            then:
-              - removeLabel:
-                  label: Stale
+                  label: needs-typeLabel
     scheduledSearches:
-      - description: Close issues that are 'Needs-Info' and 'Stale', and have not received any activity for 1 week
+      - description: Close issues that are 'needs-info' and 'Stale', and have not received any activity for 1 week
         frequencies:
           - hourly:
               hour: 1
@@ -103,6 +119,8 @@ configuration:
           - isNotLabeledWith:
               label: Priority:1
           - isNotLabeledWith:
+              label: Type:Feature
+          - isNotLabeledWith:
               label: DoNotClose
         actions:
           - closeIssue
@@ -118,7 +136,7 @@ configuration:
               label: testing
         actions:
           - addReply:
-              reply: "TEST - Scheduled runs work - THIS IS A TEST ISSUE"
+              reply: "TEST - Scheduled runs work"
       - description: TEST - reply to test issue and close
         frequencies:
           - hourly:
@@ -129,7 +147,7 @@ configuration:
               label: testing-close
         actions:
           - addReply:
-              reply: "TEST - Scheduled runs work - THIS IS A TEST ISSUE"
+              reply: "TEST - Scheduled runs works and can close issues"
           - closeIssue
 onFailure:
 onSuccess:
