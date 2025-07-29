@@ -16,6 +16,14 @@ configuration:
               action: Opened
           - bodyContains:
               pattern: "Type: Bug"
+          - not:
+              or:
+                - hasLabel:
+                    label: Type:Bug
+                - hasLabel:
+                    label: Type:Feature
+                - hasLabel:
+                    label: Type:CustomerSupport
         then:
           - addLabel:
               label: Type:Bug
@@ -27,6 +35,14 @@ configuration:
               action: Opened
           - bodyContains:
               pattern: "Type: Feature Request"
+          - not:
+              or:
+                - hasLabel:
+                    label: Type:Bug
+                - hasLabel:
+                    label: Type:Feature
+                - hasLabel:
+                    label: Type:CustomerSupport
         then:
           - addLabel:
               label: Type:Feature
