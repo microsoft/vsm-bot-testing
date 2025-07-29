@@ -44,6 +44,12 @@ configuration:
                     label: Type:Feature
                 - hasLabel:
                     label: Type:CustomerSupport
+          - not:
+              or:
+                - bodyContains:
+                    pattern: "Type: Bug"
+                - bodyContains:
+                    pattern: "Type: Feature Request"
         then:
           - addReply:
               reply: 'Team, please add a `Type:Bug`/`Type:Feature`/`Type:CustomerSupport` label as applicable.'
