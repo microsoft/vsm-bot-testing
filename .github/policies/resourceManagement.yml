@@ -90,6 +90,23 @@ configuration:
             then:
               - removeLabel:
                   label: needs-typeLabel
+      - description: Update issues that had recent activity
+        triggerOnOwnActions: false
+        if:
+          - payloadType: Issue_Comment
+          - isOpen
+          - or:
+            - isAction:
+                action: Created # create or update (applies to issue description too?)
+            - isAction:
+                action: Edited
+        then:
+          - if:
+              - hasLabel:
+                  label: stale
+            then:
+              - removeLabel:
+                  label: stale
     scheduledSearches:
       - description: Close issues that are 'needs-info' and 'Stale', and have not received any activity for 1 week
         frequencies:
