@@ -93,7 +93,7 @@ configuration:
       - description: Update issues that had recent activity
         triggerOnOwnActions: false
         if:
-          - payloadType: Issue_Comment
+          - payloadType: Issues
           - isOpen
           - or:
             - isAction:
