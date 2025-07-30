@@ -171,5 +171,20 @@ configuration:
           - addReply:
               reply: "TEST - Scheduled runs works and can close issues"
           - closeIssue
+      - description: Add 'needs-typeLabel' to existing issues that do not have a Type label
+        frequencies:
+          - hourly:
+              hour: 1
+        filters:
+          - isOpen
+          - isNotLabeledWith:
+              label: Type:Bug
+          - isNotLabeledWith:
+              label: Type:Feature
+          - isNotLabeledWith:
+              label: Type:CustomerSupport
+        actions:
+          - addLabel:
+              label: needs-typeLabel
 onFailure:
 onSuccess:
