@@ -15,8 +15,8 @@ jobs:
       - name: Find issues with no non-auth-user comments in the past 580 days
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: microsoft/vsmarketplace
-          # REPO: microsoft/vsm-bot-testing
+          # REPO: microsoft/vsmarketplace
+          REPO: microsoft/vsm-bot-testing
           LOOKBACK_DAYS: 580
           # LOOKBACK_DAYS: 238
           # Space-separated list of authorized users whose comments are ignored
@@ -82,7 +82,7 @@ jobs:
               matched_issues="$matched_issues $ISSUE"
 
               # # Add a staleness comment (but only once)
-              # STALE_COMMENT="This issue will be closed due to staleness for the past ${LOOKBACK_DAYS} days"
+              # STALE_COMMENT="${issueAuthor}, this issue has been closed due to inactivity for 18 months. Please feel free to reopen it if you have further information or questions."
               # echo "      💬 Posting staleness comment to Issue #$ISSUE"
               # gh issue comment "$ISSUE" -R "$REPO" --body "$STALE_COMMENT" >/dev/null
 
