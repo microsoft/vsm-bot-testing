@@ -17,8 +17,8 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # REPO: microsoft/vsmarketplace
           REPO: microsoft/vsm-bot-testing
-          LOOKBACK_DAYS: 580
-          # LOOKBACK_DAYS: 238
+          # LOOKBACK_DAYS: 580
+          LOOKBACK_DAYS: 238
           # Space-separated list of authorized users whose comments are ignored
           # AUTH_USERS: "github-actions[bot] microsoft-github-policy-service[bot] joaomoreno joelverhagen agr fiveisprime sbanni pjcollins jimmylewis erdembayar sandy081 mariaghiondea chabiss skofman1 mcumming seaniyer etvorun zhhyu Lanaparezanin pragnya17 japarson lyndaidaii isidorn madhurivadaligithub v-ponkumar v-manil2 v-sulagnapal satapathyj V-ManaliP pratikgawali-msft"
           AUTH_USERS: "github-actions[bot] microsoft-github-policy-service[bot] joaomoreno joelverhagen agr fiveisprime sbanni pjcollins jimmylewis erdembayar sandy081 mariaghiondea chabiss skofman1 mcumming seaniyer etvorun  tj-devel709 zhhyu Lanaparezanin pragnya17 japarson lyndaidaii advay26 isidorn madhurivadaligithub v-ponkumar v-manil2 v-sulagnapal satapathyj V-ManaliP pratikgawali-msft"
