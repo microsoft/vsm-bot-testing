@@ -80,19 +80,18 @@ jobs:
             if [ "$non_auth_count" -eq 0 ]; then
               echo "   ✅ Issue #$ISSUE — no comments from non-auth users in the past ${LOOKBACK_DAYS} days"
               matched_issues="$matched_issues $ISSUE"
+              # ------------------------------------------------------------
+              # Add a staleness comment (but only once)
+              # ------------------------------------------------------------
+              STALE_COMMENT="This issue will be closed due to staleness for the past ${LOOKBACK_DAYS} days"
+              echo "      💬 Posting staleness comment to Issue #$ISSUE"
+              gh issue comment "$ISSUE" -R "$REPO" --body "$STALE_COMMENT" >/dev/null
             else
               echo "   ➡️  Issue #$ISSUE — ${non_auth_count} comment(s) from non-auth user(s), skipping"
 
               # testing
               echo "      Non-auth user(s):"
               echo "$non_auth_users" | sed 's/^/      - /'
-
-              # ------------------------------------------------------------
-              # Add a staleness comment (but only once)
-              # ------------------------------------------------------------
-              STALE_COMMENT="This issue will be closed due to staleness"
-              echo "      💬 Posting staleness comment to Issue #$ISSUE"
-              gh issue comment "$ISSUE" -R "$REPO" --body "$STALE_COMMENT" >/dev/null
 
             fi
             echo ""
