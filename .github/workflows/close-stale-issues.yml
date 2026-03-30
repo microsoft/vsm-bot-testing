@@ -68,11 +68,25 @@ jobs:
               --argjson auth "$AUTH_USERS_JSON" \
               '[.[] | select(.user.login as $u | ($auth | index($u)) == null)] | length')
 
+            # testing
+            # Get unique non-auth usernames for this issue (one per line)
+            non_auth_users=$(echo "$comments" | jq -r \
+              --argjson auth "$AUTH_USERS_JSON" \
+              '[.[] | select(.user.login as $u | ($auth | index($u)) == null) | .user.login]
+               | unique
+               | .[]'
+            )
+
             if [ "$non_auth_count" -eq 0 ]; then
               echo "   ✅ Issue #$ISSUE — no comments from non-auth users in the past ${LOOKBACK_DAYS} days"
               matched_issues="$matched_issues $ISSUE"
             else
               echo "   ➡️  Issue #$ISSUE — ${non_auth_count} comment(s) from non-auth user(s), skipping"
+
+              # testing
+              echo "      Non-auth user(s):"
+              echo "$non_auth_users" | sed 's/^/      - /'
+
             fi
             echo ""
           done
