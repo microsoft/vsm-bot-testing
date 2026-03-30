@@ -86,6 +86,12 @@ jobs:
               STALE_COMMENT="This issue will be closed due to staleness for the past ${LOOKBACK_DAYS} days"
               echo "      💬 Posting staleness comment to Issue #$ISSUE"
               gh issue comment "$ISSUE" -R "$REPO" --body "$STALE_COMMENT" >/dev/null
+
+              
+              # Close the issue
+              echo "      ✅ Closing issue"
+              gh issue close "$ISSUE" -R "$REPO" >/dev/null
+
             else
               echo "   ➡️  Issue #$ISSUE — ${non_auth_count} comment(s) from non-auth user(s), skipping"
 
@@ -98,7 +104,7 @@ jobs:
           done
 
           echo "============================================================"
-          echo "Issues with no non-auth-user comments in the past ${LOOKBACK_DAYS} days:"
+          echo "Issues with no non-auth-user comments in the past ${LOOKBACK_DAYS} days that were closed:"
           if [ -z "$matched_issues" ]; then
             echo "  (none found)"
           else
