@@ -8,7 +8,7 @@ on:
 jobs:
   find-issues:
     permissions:
-      issues: read
+      issues: write
     runs-on: ubuntu-latest
 
     steps:
@@ -86,6 +86,13 @@ jobs:
               # testing
               echo "      Non-auth user(s):"
               echo "$non_auth_users" | sed 's/^/      - /'
+
+              # ------------------------------------------------------------
+              # Add a staleness comment (but only once)
+              # ------------------------------------------------------------
+              STALE_COMMENT="This issue will be closed due to staleness"
+              echo "      💬 Posting staleness comment to Issue #$ISSUE"
+              gh issue comment "$ISSUE" -R "$REPO" --body "$STALE_COMMENT" >/dev/null
 
             fi
             echo ""
