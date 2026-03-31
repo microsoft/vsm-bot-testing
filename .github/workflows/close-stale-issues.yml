@@ -15,8 +15,8 @@ jobs:
       - name: Find issues with no non-auth-user comments in the past 580 days
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: microsoft/vsmarketplace
-          # REPO: microsoft/vsm-bot-testing
+          # REPO: microsoft/vsmarketplace
+          REPO: microsoft/vsm-bot-testing
           LOOKBACK_DAYS: 580
           # LOOKBACK_DAYS: 239
           # Space-separated list of authorized users whose comments are ignored
